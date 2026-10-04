@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unhuequín · Te avisamos cuando se libera un huequín</title>
+  <meta name="description" content="Unhuequín avisa por correo cuando se libera una plaza en servicios con cita o reserva limitada. Solo avisa: la reserva se hace siempre en el canal oficial.">
+  <meta property="og:title" content="Unhuequín · Te avisamos cuando se libera un huequín">
+  <meta property="og:description" content="Avisos de huecos libres en servicios con cita o reserva limitada. Bajo volumen, vía oficial siempre que exista y la reserva siempre en el canal del titular.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#16131c">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    @font-face {
+      font-family: 'Geist';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url(fonts/Geist.woff2) format('woff2');
+    }
+
+    :root {
+      --font: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --bg: #f7f6fa;
+      --surface: #ffffff;
+      --fg: #16131c;
+      --muted: #4d4858;
+      --subtle: #6f6a7b;
+      --line: #e6e2ee;
+      --line-soft: #f0edf5;
+      --line-strong: #d9d4e3;
+      --ink: #16131c;
+      --ink-deep: #0c0a10;
+      --on-ink: #ffffff;
+      --on-ink-muted: #b9b3c6;
+      --brand: #7c3aed;
+      --brand-bright: #8b5cf6;
+      --brand-ink: #5b21b6;
+      --brand-light: #c4b5fd;
+      --brand-line: #ddd6fe;
+      --brand-soft: #ede9fe;
+      --brand-tint: #f5f3ff;
+      --pop: #ffd45c;
+      --pop-hover: #f7c63a;
+      --pop-soft: #fff3cc;
+      --pop-ink: #5a3d00;
+      --accent-soft: #f5d0fe;
+      --radius: 12px;
+      --radius-xl: 20px;
+      --shadow: 0 24px 48px -28px rgba(46, 16, 101, .35);
+      --ease: cubic-bezier(.2, .8, .2, 1);
+      color-scheme: light;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 16px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { margin: 0; letter-spacing: -.03em; line-height: 1.15; }
+    p { margin: 0; }
+    a { color: var(--brand-ink); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible, select:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+    svg { flex: none; }
+
+    .container { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 640px) { .container { padding: 0 32px; } }
+
+    /* Cabecera */
+    .header { position: sticky; top: 0; z-index: 10; background: rgba(247, 246, 250, .92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line); }
+    .header__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--fg); font-weight: 600; font-size: 18px; letter-spacing: -.02em; }
+    .brand:hover { text-decoration: none; }
+    .nav { display: flex; align-items: center; gap: 22px; font-size: 14px; }
+    .nav__link { display: none; color: var(--muted); }
+    .nav__link:hover { color: var(--fg); text-decoration: none; }
+    @media (min-width: 900px) { .nav__link { display: inline; } }
+    .nav__contact { display: none; }
+    @media (min-width: 480px) { .nav__contact { display: inline-flex; } }
+
+    /* Selector de idioma: solo aparece con JavaScript, que es quien cambia los textos */
+    .lang { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px; border: 1px solid var(--line-strong);
+      border-radius: 8px; background: var(--surface); color: var(--muted); }
+    .lang[hidden] { display: none; }
+    .lang svg { width: 16px; height: 16px; }
+    .lang select { appearance: none; border: 0; background: transparent; color: var(--fg); font: inherit; font-size: 14px; cursor: pointer; padding: 0 2px; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 10px; padding: 12px 20px; font-weight: 500;
+      font-size: 15px; background: var(--ink); color: var(--on-ink); transition: background-color .15s; }
+    .btn:hover { background: var(--ink-deep); text-decoration: none; }
+    .btn--small { padding: 9px 16px; font-size: 14px; }
+    .btn--pop { background: var(--pop); color: var(--ink); }
+    .btn--pop:hover { background: var(--pop-hover); }
+    .btn--ghost { background: transparent; color: var(--fg); border: 1px solid var(--line-strong); }
+    .btn--ghost:hover { background: var(--surface); }
+    .btn svg { width: 16px; height: 16px; }
+
+    /* Portada */
+    .hero { padding: 56px 0 72px; }
+    .hero__grid { display: grid; gap: 48px; align-items: center; }
+    @media (min-width: 900px) { .hero { padding: 88px 0 104px; } .hero__grid { grid-template-columns: 1.1fr .9fr; gap: 64px; } }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--brand-ink);
+      background: var(--brand-soft); border: 1px solid var(--brand-line); border-radius: 99px; padding: 5px 12px; }
+    .eyebrow::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
+    .hero h1 { margin-top: 20px; font-size: clamp(36px, 6vw, 58px); font-weight: 600; }
+    .hero h1 mark { color: inherit; padding: 0 .12em; border-radius: 8px; white-space: nowrap;
+      background: linear-gradient(var(--pop), var(--pop)) no-repeat left / 100% 100%; animation: sweep .7s var(--ease) .55s both; }
+    .hero__lead { margin-top: 20px; font-size: 18px; color: var(--muted); max-width: 34em; }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+    /* Ilustración: el correo de aviso */
+    .stage { position: relative; display: grid; place-items: center; padding: 40px 16px; border-radius: var(--radius-xl);
+      background: radial-gradient(120% 90% at 20% 10%, var(--brand-bright), var(--brand-ink)); overflow: hidden; min-height: 360px; }
+    .stage::before, .stage::after { content: ''; position: absolute; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .28); }
+    .stage::before { width: 420px; height: 420px; left: -140px; top: -120px; }
+    .stage::after { width: 240px; height: 240px; right: -70px; bottom: -80px; border-color: rgba(255, 255, 255, .4); }
+    .mail { position: relative; z-index: 1; width: 100%; max-width: 340px; background: var(--surface); border-radius: 16px;
+      box-shadow: 0 30px 60px -24px rgba(12, 10, 16, .55); padding: 20px; }
+    .mail__head { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .mail__from { font-size: 14px; font-weight: 600; }
+    .mail__time { font-size: 12px; color: var(--subtle); }
+    .mail__icon { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--ink); color: var(--pop); }
+    .mail__icon svg { width: 20px; height: 20px; transform-origin: 50% 2px; }
+    .mail__icon::after { content: ''; position: absolute; top: -3px; right: -3px; width: 11px; height: 11px; border-radius: 50%;
+      background: var(--pop); border: 2px solid var(--surface); }
+    .mail__title { margin-top: 14px; font-size: 18px; font-weight: 600; letter-spacing: -.02em; }
+    .mail__slot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding: 12px 14px;
+      background: var(--brand-tint); border: 1px solid var(--brand-line); border-radius: 10px; font-size: 14px; }
+    .mail__slot strong { font-size: 15px; }
+    .mail__tag { font-size: 12px; font-weight: 600; color: var(--pop-ink); background: var(--pop); border-radius: 99px; padding: 2px 9px; white-space: nowrap; }
+    .mail__cta { display: block; margin-top: 14px; text-align: center; background: var(--ink); color: var(--on-ink); border-radius: 10px;
+      padding: 11px; font-size: 14px; font-weight: 500; }
+    .mail__note { margin-top: 10px; font-size: 12px; color: var(--subtle); text-align: center; }
+
+    /* Secciones */
+    .section { padding: 72px 0; border-top: 1px solid var(--line); }
+    @media (min-width: 900px) { .section { padding: 96px 0; } }
+    .section--white { background: var(--surface); }
+    .section__head { max-width: 640px; margin-bottom: 40px; }
+    .kicker { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--brand); }
+    .section h2 { margin-top: 10px; font-size: clamp(28px, 4vw, 38px); font-weight: 600; }
+    .section__lead { margin-top: 14px; font-size: 17px; color: var(--muted); }
+
+    .grid { display: grid; gap: 16px; }
+    @media (min-width: 700px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 980px) { .grid--4 { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 700px) and (max-width: 979px) { .grid--4 { grid-template-columns: repeat(2, 1fr); } }
+
+    .card { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 24px;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--brand-line); }
+    .section--white .card { background: var(--bg); border-color: var(--line); }
+    .card h3 { font-size: 18px; font-weight: 600; margin-top: 16px; }
+    .card p { margin-top: 8px; color: var(--muted); font-size: 15px; }
+    .card__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--brand-soft); color: var(--brand-ink); }
+    .card__icon svg { width: 20px; height: 20px; }
+
+    .step__num { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--pop);
+      font-weight: 600; font-size: 15px; }
+
+    /* Esquema: muchas búsquedas, una sola consulta */
+    .flow { margin: 0 0 24px; padding: 24px 16px 28px; border: 1px solid var(--line); border-radius: var(--radius-xl);
+      background: radial-gradient(90% 120% at 50% 0%, var(--brand-tint), var(--bg)); }
+    @media (min-width: 700px) { .flow { padding: 32px 32px 36px; } }
+    .flow__art svg { display: block; width: 100%; height: auto; max-width: 760px; margin: 0 auto; }
+    .flow__steps { display: grid; gap: 14px; margin-top: 20px; }
+    @media (min-width: 700px) { .flow__steps { grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; } }
+    .flow__steps strong { display: block; font-size: 16px; letter-spacing: -.01em; }
+    .flow__steps span { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
+    .flow-line { fill: none; stroke-linecap: round; }
+    .flow-line--in { stroke: var(--brand-light); stroke-width: 2.5; stroke-dasharray: 2 9; animation: flow 1.2s linear infinite; }
+    .flow-line--out { stroke: var(--brand); stroke-width: 4; stroke-dasharray: 2 12; animation: flow .9s linear infinite; }
+    .flow-pulse { transform-box: fill-box; transform-origin: center; animation: halo 2.4s ease-out infinite; }
+    .flow-spin { transform-box: fill-box; transform-origin: center; animation: spin 9s linear infinite; }
+    .flow-badge { transform-box: fill-box; transform-origin: center; animation: badge 4s var(--ease) infinite both; }
+    .flow-badge:nth-of-type(2) { animation-delay: .25s; }
+    .flow-slot { animation: blink 2s ease-in-out infinite; }
+
+    /* Compromisos con los titulares */
+    .commit { display: grid; gap: 0; background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; }
+    @media (min-width: 760px) { .commit { grid-template-columns: repeat(2, 1fr); } }
+    .commit__item { display: flex; align-items: flex-start; gap: 16px; padding: 22px 24px; border-bottom: 1px solid var(--line); }
+    @media (min-width: 760px) {
+      .commit__item:nth-child(odd) { border-right: 1px solid var(--line); }
+      .commit__item:nth-last-child(-n+2) { border-bottom: none; }
+    }
+    .commit__item:last-child { border-bottom: none; }
+    .commit__icon { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; color: var(--on-ink);
+      background: linear-gradient(135deg, var(--brand-bright), var(--brand-ink)); box-shadow: 0 10px 20px -12px rgba(91, 33, 182, .8);
+      transition: background .25s, color .25s; }
+    .commit__icon svg { width: 22px; height: 22px; }
+    .commit__item:hover .commit__icon { background: var(--ink); color: var(--pop); }
+    .commit__item h3 { font-size: 16px; font-weight: 600; letter-spacing: -.01em; margin-top: 2px; }
+    .commit__item p { margin-top: 4px; color: var(--muted); font-size: 15px; }
+
+    /* Estado del proyecto */
+    .facts { display: grid; gap: 16px; margin-top: 8px; }
+    @media (min-width: 760px) { .facts { grid-template-columns: repeat(3, 1fr); } }
+    .fact { border-left: 3px solid var(--brand); padding: 4px 0 4px 18px; }
+    .fact strong { display: block; font-size: 17px; letter-spacing: -.01em; }
+    .fact span { display: block; margin-top: 4px; color: var(--muted); font-size: 15px; }
+
+    /* Contacto */
+    .contact { background: var(--ink); color: var(--on-ink); border-radius: var(--radius-xl); padding: 40px 24px; position: relative; overflow: hidden; }
+    @media (min-width: 760px) { .contact { padding: 56px; } }
+    .contact::after { content: ''; position: absolute; width: 320px; height: 320px; right: -110px; top: -130px; border-radius: 50%;
+      border: 2px solid rgba(139, 92, 246, .55); }
+    .contact h2 { position: relative; z-index: 1; font-size: clamp(26px, 4vw, 36px); font-weight: 600; max-width: 18em; }
+    .contact p { position: relative; z-index: 1; margin-top: 14px; color: var(--on-ink-muted); font-size: 17px; max-width: 36em; }
+    .contact__actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 28px; }
+    .contact__mail { color: var(--on-ink); font-weight: 500; }
+    .contact__mail:hover { color: var(--pop); }
+
+    /* Pie */
+    .footer { padding: 40px 0 48px; font-size: 14px; color: var(--subtle); }
+    .footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; }
+    .footer__note { max-width: 40em; }
+
+    /* Movimiento: entrada escalonada de la portada, el correo de aviso "vivo" y las secciones que aparecen al llegar */
+    .hero__copy > * { animation: rise .7s var(--ease) both; }
+    .hero__copy > :nth-child(2) { animation-delay: .08s; }
+    .hero__copy > :nth-child(3) { animation-delay: .16s; }
+    .hero__copy > :nth-child(4) { animation-delay: .24s; }
+    .stage { animation: rise .8s var(--ease) .3s both; }
+    .stage::before { animation: drift 13s ease-in-out infinite; }
+    .stage::after { animation: drift 9s ease-in-out infinite reverse; }
+    .mail { animation: float 6s ease-in-out 1.4s infinite; }
+    /* La campana suena cada pocos segundos, y su punto amarillo late a la vez */
+    .mail__icon svg { animation: ring 3s ease-in-out .9s infinite; }
+    .mail__icon::after { animation: dot 3s ease-out .9s infinite; }
+    .mail__slot { animation: pop-in .6s var(--ease) 1.1s both; }
+    .mail__cta { animation: rise .5s var(--ease) 1.3s both; }
+    .mail__tag { animation: pulse 1.6s ease-out 1.7s 3; }
+    .card:hover .card__icon svg, .card:hover .step__num, .commit__item:hover .commit__icon svg { animation: nudge .5s var(--ease); }
+    /* Las secciones aparecen al llegar a ellas con el scroll. Donde el navegador no lo soporta, se ven sin más.
+       Se anima `translate` (no `transform`) para no pisar la elevación de las tarjetas al pasar el ratón */
+    @supports (animation-timeline: view()) {
+      .section__head, .card, .commit__item, .fact, .contact, .flow {
+        animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 70%;
+      }
+      .grid > :nth-child(2), .commit__item:nth-child(even), .fact:nth-child(2) { animation-range: entry 10% entry 80%; }
+      .grid > :nth-child(3), .fact:nth-child(3) { animation-range: entry 20% entry 90%; }
+      .grid > :nth-child(4) { animation-range: entry 30% entry 100%; }
+    }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    @keyframes reveal { from { opacity: 0; translate: 0 28px; } to { opacity: 1; translate: none; } }
+    @keyframes sweep { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes drift { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(16px, 12px) scale(1.05); } }
+    @keyframes pop-in { 0% { opacity: 0; transform: scale(.9); } 60% { opacity: 1; transform: scale(1.03); } 100% { transform: none; } }
+    @keyframes pulse { from { box-shadow: 0 0 0 0 rgba(255, 212, 92, .8); } to { box-shadow: 0 0 0 10px rgba(255, 212, 92, 0); } }
+    @keyframes nudge { 0%, 100% { transform: none; } 40% { transform: translateY(-3px) rotate(-6deg); } 70% { transform: translateY(1px) rotate(3deg); } }
+    @keyframes ring {
+      0%, 40%, 100% { transform: rotate(0); }
+      5% { transform: rotate(18deg); }
+      10% { transform: rotate(-16deg); }
+      15% { transform: rotate(12deg); }
+      20% { transform: rotate(-9deg); }
+      25% { transform: rotate(5deg); }
+      30% { transform: rotate(-2deg); }
+    }
+    @keyframes dot { 0% { box-shadow: 0 0 0 0 rgba(255, 212, 92, .9); } 30%, 100% { box-shadow: 0 0 0 9px rgba(255, 212, 92, 0); } }
+    @keyframes flow { to { stroke-dashoffset: -22; } }
+    @keyframes halo { from { transform: scale(1); opacity: .7; } to { transform: scale(1.45); opacity: 0; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes badge { 0%, 55% { transform: scale(0); } 62% { transform: scale(1.25); } 68%, 92% { transform: scale(1); } 100% { transform: scale(0); } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="#inicio" aria-label="Unhuequín, inicio" data-i18n-aria="brand.aria">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path d="M12 2a10 10 0 1 1-7.07 2.93" fill="none" stroke="#8B5CF6" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="5" fill="#000000"/>
+        </svg>
+        Unhuequín
+      </a>
+      <nav class="nav" aria-label="Secciones" data-i18n-aria="nav.aria">
+        <a class="nav__link" href="#como-funciona" data-i18n="nav.how">Cómo funciona</a>
+        <a class="nav__link" href="#titulares" data-i18n="nav.owners">Para titulares</a>
+        <a class="nav__link" href="#compromisos" data-i18n="nav.commit">Compromisos</a>
+        <label class="lang" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          <select id="lang" aria-label="Idioma" data-i18n-aria="lang.aria"></select>
+        </label>
+        <a class="btn btn--small nav__contact" href="#contacto" data-i18n="nav.contact">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <span class="eyebrow" data-i18n="hero.eyebrow">Proyecto independiente</span>
+          <h1 data-i18n-html="hero.title">Te avisamos cuando se libera <mark>un huequín</mark>.</h1>
+          <p class="hero__lead" data-i18n-html="hero.lead">
+            Unhuequín avisa por correo electrónico cuando aparece una plaza libre en servicios con cita o reserva limitada:
+            una cita que alguien anula, una mesa que se queda libre. <strong>Solo avisamos</strong>: la reserva se hace
+            siempre en el canal oficial del titular.
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href="#contacto">
+              <span data-i18n="hero.cta">Hablemos</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#compromisos" data-i18n="hero.cta2">Cómo tratamos las fuentes</a>
+          </div>
+        </div>
+
+        <div class="stage" role="img" aria-label="Ejemplo de correo de aviso: se ha liberado un hueco que encaja con lo que buscas, con un botón para reservar en la web oficial." data-i18n-aria="mail.aria">
+          <div class="mail" aria-hidden="true">
+            <div class="mail__head">
+              <span class="mail__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+              </span>
+              <div>
+                <div class="mail__from">Unhuequín</div>
+                <div class="mail__time" data-i18n="mail.time">Ahora mismo</div>
+              </div>
+            </div>
+            <div class="mail__title" data-i18n="mail.title">Se ha liberado un huequín</div>
+            <div class="mail__slot">
+              <div><strong data-i18n="mail.day">Jueves 16</strong> · 9:40</div>
+              <span class="mail__tag" data-i18n="mail.tag">Encaja</span>
+            </div>
+            <div class="mail__cta" data-i18n="mail.cta">Reservar en la web oficial →</div>
+            <div class="mail__note" data-i18n="mail.note">Ejemplo ilustrativo</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white" aria-labelledby="problema-title">
+      <div class="container">
+        <div class="section__head">
+          <span class="kicker" data-i18n="prob.kicker">El problema</span>
+          <h2 id="problema-title" data-i18n="prob.title">Los huecos se liberan, pero casi nadie se entera a tiempo.</h2>
+          <p class="section__lead" data-i18n="prob.lead">
+            Cuando un servicio con plazas limitadas se llena, la única forma de conseguir sitio es volver a mirar una y
+            otra vez, esperando a que alguien anule.
+          </p>
+        </div>
+        <div class="grid grid--3">
+          <article class="card">
+            <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
+            <h3 data-i18n="prob.1t">Consultas repetidas</h3>
+            <p data-i18n="prob.1p">Muchas personas recargan la misma página durante días. Para el titular es tráfico inútil; para ellas, tiempo perdido.</p>
+          </article>
+          <article class="card">
+            <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="m14 14-4 4"/><path d="m10 14 4 4"/></svg></span>
+            <h3 data-i18n="prob.2t">Plazas que se pierden</h3>
+            <p data-i18n="prob.2p">Una anulación de última hora a menudo se queda vacía, aunque haya alguien que la habría aprovechado.</p>
+          </article>
+          <article class="card">
+            <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
+            <h3 data-i18n="prob.3t">Intermediarios dudosos</h3>
+            <p data-i18n="prob.3p">La escasez atrae a webs que cobran por "conseguir" plazas o se hacen pasar por el canal oficial.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona" aria-labelledby="como-title">
+      <div class="container">
+        <div class="section__head">
+          <span class="kicker" data-i18n="how.kicker">Cómo funciona</span>
+          <h2 id="como-title" data-i18n="how.title">Un aviso en lugar de cien recargas.</h2>
+          <p class="section__lead" data-i18n="how.lead">La persona deja dicho qué busca una sola vez y nosotros le avisamos cuando aparece.</p>
+        </div>
+        <div class="grid grid--3">
+          <article class="card">
+            <span class="step__num">1</span>
+            <h3 data-i18n="how.1t">Dice qué busca</h3>
+            <p data-i18n="how.1p">Dónde, entre qué fechas y en qué franja horaria. Con varias opciones a la vez si le sirven. Solo pedimos un correo electrónico.</p>
+          </article>
+          <article class="card">
+            <span class="step__num">2</span>
+            <h3 data-i18n="how.2t">Comprobamos la disponibilidad</h3>
+            <p data-i18n="how.2p">Agrupamos las búsquedas por recurso: una sola comprobación, a ritmo pausado, sirve a todas las personas que esperan lo mismo.</p>
+          </article>
+          <article class="card">
+            <span class="step__num">3</span>
+            <h3 data-i18n="how.3t">Avisamos y enlazamos</h3>
+            <p data-i18n="how.3p">Si aparece un hueco que encaja, enviamos un correo con el enlace al canal oficial. La persona reserva allí, por sí misma.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white" id="titulares" aria-labelledby="titulares-title">
+      <div class="container">
+        <div class="section__head">
+          <span class="kicker" data-i18n="own.kicker">Para titulares y proveedores de reservas</span>
+          <h2 id="titulares-title" data-i18n="own.title">Complementamos el canal oficial, no lo sustituimos.</h2>
+          <p class="section__lead" data-i18n="own.lead">
+            Unhuequín no vende, no reserva y no gestiona plazas. Su único trabajo es llevar a la persona adecuada al canal
+            oficial en el momento en que hay sitio.
+          </p>
+        </div>
+
+        <figure class="flow">
+          <div class="flow__art" role="img" aria-label="Esquema: muchas personas que buscan lo mismo se agrupan en Unhuequín, que hace una sola consulta al canal oficial." data-i18n-aria="dia.aria">
+            <svg viewBox="0 0 720 320" aria-hidden="true">
+              <!-- Búsquedas que confluyen en Unhuequín -->
+              <path class="flow-line flow-line--in" d="M90 40 C220 40 240 160 300 160"/>
+              <path class="flow-line flow-line--in" d="M90 100 C220 100 240 160 300 160"/>
+              <path class="flow-line flow-line--in" d="M90 160 L300 160"/>
+              <path class="flow-line flow-line--in" d="M90 220 C220 220 240 160 300 160"/>
+              <path class="flow-line flow-line--in" d="M90 280 C220 280 240 160 300 160"/>
+              <!-- Una sola consulta al canal oficial -->
+              <path class="flow-line flow-line--out" d="M420 160 L538 160"/>
+
+              <!-- Personas que esperan -->
+              <g transform="translate(64 40)"><circle r="24" fill="#ede9fe"/><circle cy="-6" r="8" fill="#5b21b6"/><path d="M-13 17a13 12 0 0 1 26 0z" fill="#5b21b6"/></g>
+              <g transform="translate(64 100)"><circle r="24" fill="#fff3cc"/><circle cy="-6" r="8" fill="#5a3d00"/><path d="M-13 17a13 12 0 0 1 26 0z" fill="#5a3d00"/></g>
+              <g transform="translate(64 160)"><circle r="24" fill="#f5d0fe"/><circle cy="-6" r="8" fill="#86198f"/><path d="M-13 17a13 12 0 0 1 26 0z" fill="#86198f"/></g>
+              <g transform="translate(64 220)"><circle r="24" fill="#ddd6fe"/><circle cy="-6" r="8" fill="#4c1d95"/><path d="M-13 17a13 12 0 0 1 26 0z" fill="#4c1d95"/></g>
+              <g transform="translate(64 280)"><circle r="24" fill="#ffe9a8"/><circle cy="-6" r="8" fill="#5a3d00"/><path d="M-13 17a13 12 0 0 1 26 0z" fill="#5a3d00"/></g>
+              <!-- El aviso llega a quien encaja -->
+              <circle class="flow-badge" cx="82" cy="82" r="8" fill="#ffd45c" stroke="#fff" stroke-width="2.5"/>
+              <circle class="flow-badge" cx="82" cy="202" r="8" fill="#ffd45c" stroke="#fff" stroke-width="2.5"/>
+
+              <!-- Unhuequín -->
+              <circle class="flow-pulse" cx="360" cy="160" r="58" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+              <circle cx="360" cy="160" r="58" fill="#16131c"/>
+              <g transform="translate(360 160) scale(2.5) translate(-12 -12)">
+                <g class="flow-spin">
+                  <path d="M12 2a10 10 0 1 1-7.07 2.93" fill="none" stroke="#8B5CF6" stroke-width="3.5" stroke-linecap="round"/>
+                  <circle cx="12" cy="12" r="5" fill="#ffffff"/>
+                </g>
+              </g>
+
+              <!-- ×1 -->
+              <rect x="454" y="145" width="44" height="30" rx="15" fill="#ffd45c"/>
+              <text x="476" y="166" text-anchor="middle" font-family="Geist, system-ui, sans-serif" font-size="15" font-weight="700" fill="#16131c">×1</text>
+
+              <!-- Canal oficial: una web con su calendario -->
+              <rect x="540" y="96" width="156" height="128" rx="12" fill="#ffffff" stroke="#d9d4e3" stroke-width="1.5"/>
+              <line x1="540" y1="120" x2="696" y2="120" stroke="#e6e2ee" stroke-width="1.5"/>
+              <circle cx="556" cy="108" r="3.5" fill="#d9d4e3"/><circle cx="568" cy="108" r="3.5" fill="#d9d4e3"/><circle cx="580" cy="108" r="3.5" fill="#d9d4e3"/>
+              <g fill="#f0edf5">
+                <rect x="556" y="134" width="24" height="20" rx="4"/><rect x="588" y="134" width="24" height="20" rx="4"/><rect x="620" y="134" width="24" height="20" rx="4"/><rect x="652" y="134" width="28" height="20" rx="4"/>
+                <rect x="556" y="162" width="24" height="20" rx="4"/><rect x="588" y="162" width="24" height="20" rx="4"/><rect x="652" y="162" width="28" height="20" rx="4"/>
+                <rect x="556" y="190" width="24" height="20" rx="4"/><rect x="588" y="190" width="24" height="20" rx="4"/><rect x="620" y="190" width="24" height="20" rx="4"/><rect x="652" y="190" width="28" height="20" rx="4"/>
+              </g>
+              <rect class="flow-slot" x="620" y="162" width="24" height="20" rx="4" fill="#ffd45c"/>
+            </svg>
+          </div>
+          <figcaption class="flow__steps">
+            <div><strong data-i18n="dia.1t">Muchas personas, la misma búsqueda</strong><span data-i18n="dia.1p">Cada una deja su aviso una vez, en lugar de recargar la página.</span></div>
+            <div><strong data-i18n="dia.2t">Unhuequín las agrupa</strong><span data-i18n="dia.2p">Las búsquedas iguales se convierten en una sola.</span></div>
+            <div><strong data-i18n="dia.3t">Una consulta al canal oficial</strong><span data-i18n="dia.3p">A ritmo pausado y con topes. Si hay hueco, avisamos a quien encaja.</span></div>
+          </figcaption>
+        </figure>
+
+        <div class="grid grid--4">
+          <article class="card">
+            <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
+            <h3 data-i18n="own.1t">Menos carga</h3>
+            <p data-i18n="own.1p">Una consulta nuestra sustituye a muchas visitas repetidas de personas que solo quieren saber si hay sitio.</p>
+          </article>
+          <article class="card">
+            <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></span>
+            <h3 data-i18n="own.2t">Menos plazas vacías</h3>
+            <p data-i18n="own.2p">Las anulaciones se vuelven a ocupar antes porque avisamos enseguida a quien está esperando.</p>
+          </article>
+          <article class="card">
+            <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+            <h3 data-i18n="own.3t">Menos llamadas</h3>
+            <p data-i18n="own.3p">Menos consultas al teléfono o al mostrador preguntando si se ha liberado algo.</p>
+          </article>
+          <article class="card">
+            <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3 data-i18n="own.4t">Tráfico al sitio oficial</h3>
+            <p data-i18n="own.4p">Quien busca plaza llega a su web, no a intermediarios que cobran por la reserva o imitan su marca.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="compromisos" aria-labelledby="compromisos-title">
+      <div class="container">
+        <div class="section__head">
+          <span class="kicker" data-i18n="com.kicker">Compromisos</span>
+          <h2 id="compromisos-title" data-i18n="com.title">Cómo tratamos las fuentes de disponibilidad.</h2>
+          <p class="section__lead" data-i18n="com.lead">
+            Leer la disponibilidad que publican otros es el centro del servicio, y lo hacemos con reglas escritas que
+            aplicamos a cada fuente antes de consultarla.
+          </p>
+        </div>
+        <div class="commit">
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg></span>
+            <div><h3 data-i18n="com.1t">Vía oficial primero</h3><p data-i18n="com.1p">Si existe una API o un programa de integradores, lo usamos o lo solicitamos antes que cualquier otra cosa.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></span>
+            <div><h3 data-i18n="com.2t">Con conocimiento del titular</h3><p data-i18n="com.2p">Pedimos permiso y nos adaptamos a las condiciones que nos indique cada titular.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
+            <div><h3 data-i18n="com.3t">Volumen bajo y con topes</h3><p data-i18n="com.3p">Límites estrictos de consultas por hora y por día, a ritmo pausado y sin picos. El titular puede fijar los suyos.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div><h3 data-i18n="com.4t">Una consulta sirve a todos</h3><p data-i18n="com.4p">Solo comprobamos lo que alguien ha pedido, y cada comprobación se usa para todas las personas que esperan lo mismo.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            <div><h3 data-i18n="com.5t">Sin saltarse protecciones</h3><p data-i18n="com.5p">Nunca eludimos captchas, inicios de sesión ni límites, ni usamos redes de proxies para ocultar el origen.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="10" x2="10" y1="15" y2="9"/><line x1="14" x2="14" y1="15" y2="9"/></svg></span>
+            <div><h3 data-i18n="com.6t">Pausa automática</h3><p data-i18n="com.6p">Si la fuente responde con errores o nos pide frenar, el sistema se detiene solo y avisa para revisarlo.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></span>
+            <div><h3 data-i18n="com.7t">Nunca reservamos ni revendemos</h3><p data-i18n="com.7p">No retenemos, compramos ni cobramos plazas. La reserva es siempre de la persona, en el canal oficial.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg></span>
+            <div><h3 data-i18n="com.8t">Marca propia</h3><p data-i18n="com.8p">No usamos logotipos, colores ni textos de terceros, ni republicamos sus datos: solo lo necesario para el aviso.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg></span>
+            <div><h3 data-i18n="com.9t">Retirada inmediata</h3><p data-i18n="com.9p">Si un titular nos pide que dejemos de consultar su fuente, lo hacemos sin más.</p></div>
+          </div>
+          <div class="commit__item">
+            <span class="commit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg></span>
+            <div><h3 data-i18n="com.10t">Privacidad por defecto</h3><p data-i18n="com.10p">De las personas que usan el servicio solo guardamos el correo, sin cookies ni rastreadores. Los datos no se venden ni se ceden.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white" aria-labelledby="estado-title">
+      <div class="container">
+        <div class="section__head">
+          <span class="kicker" data-i18n="state.kicker">Estado del proyecto</span>
+          <h2 id="estado-title" data-i18n="state.title">En fase inicial, construido con calma.</h2>
+          <p class="section__lead" data-i18n="state.lead">
+            Unhuequín es un proyecto independiente. El servicio funciona de principio a fin y lo estamos abriendo poco a
+            poco, fuente a fuente, a medida que cerramos el acceso con cada titular.
+          </p>
+        </div>
+        <div class="facts">
+          <div class="fact"><strong data-i18n="state.1t">Gratuito para las personas</strong><span data-i18n="state.1p">Mientras validamos que el aviso es útil. Nunca cobramos por la cita ni por la reserva.</span></div>
+          <div class="fact"><strong data-i18n="state.2t">Servicios en preparación</strong><span data-i18n="state.2p">Citas de servicios con mucha demanda y reservas de restaurante, allí donde haya plazas que se liberan.</span></div>
+          <div class="fact"><strong data-i18n="state.3t">El servicio, en seis idiomas</strong><span data-i18n="state.3p">Castellano, valenciano, catalán, inglés, euskera y gallego.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto" aria-labelledby="contacto-title">
+      <div class="container">
+        <div class="contact">
+          <h2 id="contacto-title" data-i18n="contact.title">¿Gestionas un sistema de citas o de reservas?</h2>
+          <p data-i18n="contact.lead">
+            Nos gustaría integrarnos por la vía que prefieras: una API oficial, un acuerdo o un permiso con las
+            condiciones que fijes. Te contamos con detalle qué consultaríamos, con qué frecuencia y cómo nos identificamos.
+          </p>
+          <div class="contact__actions">
+            <a class="btn btn--pop" href="mailto:info@unhuequin.com?subject=Unhuequ%C3%ADn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span data-i18n="contact.cta">Escríbenos</span>
+            </a>
+            <a class="contact__mail" href="mailto:info@unhuequin.com">info@unhuequin.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__note" data-i18n="footer.note">
+        Unhuequín es un proyecto independiente. No está afiliado a ninguna administración pública ni a ninguna empresa
+        de citas o reservas, y no gestiona reservas en nombre de nadie.
+      </p>
+      <p>© 2026 Unhuequín · <a href="mailto:info@unhuequin.com">info@unhuequin.com</a></p>
+    </div>
+  </footer>
+
+  <script src="i18n.js" defer></script>
+</body>
+</html>
