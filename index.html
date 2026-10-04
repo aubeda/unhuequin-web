@@ -13,14 +13,14 @@
   <meta property="og:description" content="Avisos de huecos libres en servicios con cita o reserva limitada. Bajo volumen, vía oficial siempre que exista y la reserva siempre en el canal del titular.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#16131c">
-  <link rel="icon" href="favicon.svg?v=20261004-1910" type="image/svg+xml">
+  <link rel="icon" href="favicon.svg?v=20261004-1919" type="image/svg+xml">
   <style>
     @font-face {
       font-family: 'Geist';
       font-style: normal;
       font-weight: 400 700;
       font-display: swap;
-      src: url(fonts/Geist.woff2?v=20261004-1910) format('woff2');
+      src: url(fonts/Geist.woff2?v=20261004-1919) format('woff2');
     }
 
     :root {
@@ -81,8 +81,15 @@
     .nav__link { display: none; color: var(--muted); }
     .nav__link:hover { color: var(--fg); text-decoration: none; }
     @media (min-width: 900px) { .nav__link { display: inline; } }
-    .nav__contact { display: none; }
-    @media (min-width: 480px) { .nav__contact { display: inline-flex; } }
+    /* En móvil no cabe el texto: queda el sobre (el texto sigue ahí para lectores de pantalla) */
+    .nav .nav__contact { padding: 9px 10px; }
+    .nav__contact svg { width: 18px; height: 18px; }
+    .nav__contact-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    @media (min-width: 480px) {
+      .nav .nav__contact { padding: 9px 16px; }
+      .nav__contact svg { display: none; }
+      .nav__contact-text { position: static; width: auto; height: auto; overflow: visible; clip-path: none; }
+    }
 
     /* Selector de idioma: solo aparece con JavaScript, que es quien cambia los textos */
     .lang { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px; border: 1px solid var(--line-strong);
@@ -342,7 +349,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
           <select id="lang" aria-label="Idioma" data-i18n-aria="lang.aria"></select>
         </label>
-        <a class="btn btn--small nav__contact" href="#contacto" data-i18n="nav.contact">Contacto</a>
+        <a class="btn btn--small nav__contact" href="#contacto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span class="nav__contact-text" data-i18n="nav.contact">Contacto</span>
+        </a>
       </nav>
     </div>
   </header>
@@ -460,7 +470,7 @@
 
         <figure class="flow">
           <div class="flow__art" role="img" aria-label="Esquema: muchas personas que buscan lo mismo se agrupan en Unhuequín, que hace una sola consulta al canal oficial." data-i18n-aria="dia.aria">
-            <svg viewBox="0 0 720 320" aria-hidden="true">
+            <svg viewBox="36 12 668 296" aria-hidden="true">
               <!-- Búsquedas que confluyen en Unhuequín -->
               <path class="flow-line flow-line--in" d="M90 40 C220 40 240 160 300 160"/>
               <path class="flow-line flow-line--in" d="M90 100 C220 100 240 160 300 160"/>
@@ -725,7 +735,7 @@
 
   <!-- `?v=`: versión de la subida, para que el navegador no use la copia de la anterior. La pone
        scripts/version-presentacion.mjs antes de publicar -->
-  <script src="i18n.js?v=20261004-1910" defer></script>
-  <script src="form.js?v=20261004-1910" defer></script>
+  <script src="i18n.js?v=20261004-1919" defer></script>
+  <script src="form.js?v=20261004-1919" defer></script>
 </body>
 </html>
