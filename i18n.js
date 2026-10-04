@@ -2,8 +2,8 @@
  * Idiomas de la página de presentación.
  *
  * El castellano está escrito en el HTML (así la página se lee sin JavaScript) y se recoge de ahí al arrancar. Cada
- * elemento traducible lleva `data-i18n` (texto), `data-i18n-html` (texto con <mark> o <strong>) o `data-i18n-aria`
- * (aria-label). El idioma sale de `?lang=xx`, si no del navegador y, si no es ninguno de los de la lista, del inglés.
+ * elemento traducible lleva `data-i18n` (texto), `data-i18n-html` (texto con <mark> o <strong>), `data-i18n-aria`
+ * (aria-label) o `data-i18n-ph` (placeholder). El idioma sale de `?lang=xx`, si no del navegador y, si no es ninguno de los de la lista, del inglés.
  * Una clave que falte en un idioma se muestra en castellano.
  */
 (function () {
@@ -21,14 +21,14 @@
       'brand.aria': 'Unhuequín, home', 'nav.aria': 'Sections', 'nav.how': 'How it works', 'nav.owners': 'For providers',
       'nav.commit': 'Commitments', 'nav.contact': 'Contact', 'lang.aria': 'Language',
       'hero.eyebrow': 'Independent project',
-      'hero.title': 'We let you know when <mark>a spot</mark> opens up.',
-      'hero.lead': 'Unhuequín sends an email when a place becomes available in services with limited appointments or bookings: an appointment someone cancels, a table that frees up. <strong>We only notify</strong>: the booking is always made through the provider’s official channel.',
+      'hero.title': 'We’ll tell you when <mark>a spot</mark> is available.',
+      'hero.lead': 'Unhuequín sends an email when a place is available in services with limited appointments or bookings: an appointment someone cancels, new dates that open up, a table that frees up. <strong>We only notify</strong>: the booking is always made through the provider’s official channel.',
       'hero.cta': 'Let’s talk', 'hero.cta2': 'How we treat data sources',
-      'mail.aria': 'Example alert email: a spot matching your search has opened up, with a button to book on the official website.',
-      'mail.time': 'Just now', 'mail.title': 'A spot has opened up', 'mail.day': 'Thursday 16', 'mail.tag': 'Match',
+      'mail.aria': 'Example alert email: a spot matching your search is available, with a button to book on the official website.',
+      'mail.time': 'Just now', 'mail.title': 'There’s a spot for you', 'mail.day': 'Thursday 16', 'mail.tag': 'Match',
       'mail.cta': 'Book on the official website →', 'mail.note': 'Illustrative example',
-      'prob.kicker': 'The problem', 'prob.title': 'Spots open up, but hardly anyone finds out in time.',
-      'prob.lead': 'When a service with limited places is fully booked, the only way to get in is to keep checking again and again, hoping someone cancels.',
+      'prob.kicker': 'The problem', 'prob.title': 'Spots become available, but hardly anyone finds out in time.',
+      'prob.lead': 'When a service with limited places is fully booked, the only way to get in is to keep checking again and again, hoping someone cancels or new dates open up.',
       'prob.1t': 'Repeated checks', 'prob.1p': 'Many people reload the same page for days. For the provider it is useless traffic; for them, wasted time.',
       'prob.2t': 'Lost places', 'prob.2p': 'A last-minute cancellation often goes unused, even though someone would have taken it.',
       'prob.3t': 'Dubious middlemen', 'prob.3p': 'Scarcity attracts websites that charge to “get” places or pose as the official channel.',
@@ -64,9 +64,6 @@
       'state.1t': 'Free for people', 'state.1p': 'While we confirm the alerts are useful. We never charge for the appointment or the booking.',
       'state.2t': 'Services in preparation', 'state.2p': 'Appointments for high-demand services and restaurant bookings, wherever places tend to free up.',
       'state.3t': 'The service, in six languages', 'state.3p': 'Spanish, Valencian, Catalan, English, Basque and Galician.',
-      'contact.title': 'Do you run an appointment or booking system?',
-      'contact.lead': 'We would like to integrate in whatever way you prefer: an official API, an agreement or a permission under the conditions you set. We’ll explain in detail what we would query, how often and how we identify ourselves.',
-      'contact.cta': 'Write to us',
       'footer.note': 'Unhuequín is an independent project. It is not affiliated with any public authority or any appointment or booking company, and it does not make bookings on anyone’s behalf.',
     },
 
@@ -74,14 +71,14 @@
       'brand.aria': 'Unhuequín, accueil', 'nav.aria': 'Sections', 'nav.how': 'Fonctionnement', 'nav.owners': 'Pour les gestionnaires',
       'nav.commit': 'Engagements', 'nav.contact': 'Contact', 'lang.aria': 'Langue',
       'hero.eyebrow': 'Projet indépendant',
-      'hero.title': 'Nous vous prévenons quand <mark>une place</mark> se libère.',
-      'hero.lead': 'Unhuequín envoie un e-mail quand une place se libère dans un service à rendez-vous ou à réservation limitée : un rendez-vous annulé, une table qui se libère. <strong>Nous ne faisons que prévenir</strong> : la réservation se fait toujours sur le canal officiel du gestionnaire.',
+      'hero.title': 'Nous vous prévenons dès qu’<mark>une place</mark> est disponible.',
+      'hero.lead': 'Unhuequín envoie un e-mail quand une place est disponible dans un service à rendez-vous ou à réservation limitée : un rendez-vous annulé, de nouvelles dates qui s’ouvrent, une table qui se libère. <strong>Nous ne faisons que prévenir</strong> : la réservation se fait toujours sur le canal officiel du gestionnaire.',
       'hero.cta': 'Parlons-en', 'hero.cta2': 'Notre approche des sources',
-      'mail.aria': 'Exemple d’e-mail d’alerte : une place correspondant à votre recherche s’est libérée, avec un bouton pour réserver sur le site officiel.',
-      'mail.time': 'À l’instant', 'mail.title': 'Une place s’est libérée', 'mail.day': 'Jeudi 16', 'mail.tag': 'Compatible',
+      'mail.aria': 'Exemple d’e-mail d’alerte : une place correspondant à votre recherche est disponible, avec un bouton pour réserver sur le site officiel.',
+      'mail.time': 'À l’instant', 'mail.title': 'Une place est disponible', 'mail.day': 'Jeudi 16', 'mail.tag': 'Compatible',
       'mail.cta': 'Réserver sur le site officiel →', 'mail.note': 'Exemple illustratif',
-      'prob.kicker': 'Le problème', 'prob.title': 'Des places se libèrent, mais presque personne ne le sait à temps.',
-      'prob.lead': 'Quand un service aux places limitées est complet, le seul moyen d’obtenir une place est de vérifier encore et encore, en espérant une annulation.',
+      'prob.kicker': 'Le problème', 'prob.title': 'Des places se libèrent ou s’ouvrent, mais presque personne ne le sait à temps.',
+      'prob.lead': 'Quand un service aux places limitées est complet, le seul moyen d’obtenir une place est de vérifier encore et encore, en espérant une annulation ou de nouvelles dates.',
       'prob.1t': 'Consultations répétées', 'prob.1p': 'Beaucoup de gens rechargent la même page pendant des jours. Pour le gestionnaire, c’est du trafic inutile ; pour eux, du temps perdu.',
       'prob.2t': 'Des places perdues', 'prob.2p': 'Une annulation de dernière minute reste souvent vide, alors que quelqu’un l’aurait prise.',
       'prob.3t': 'Des intermédiaires douteux', 'prob.3p': 'La pénurie attire des sites qui font payer pour « obtenir » des places ou se font passer pour le canal officiel.',
@@ -117,9 +114,6 @@
       'state.1t': 'Gratuit pour les personnes', 'state.1p': 'Le temps de vérifier que les alertes sont utiles. Nous ne faisons jamais payer le rendez-vous ni la réservation.',
       'state.2t': 'Services en préparation', 'state.2p': 'Rendez-vous pour des services très demandés et réservations de restaurant, partout où des places se libèrent.',
       'state.3t': 'Le service, en six langues', 'state.3p': 'Espagnol, valencien, catalan, anglais, basque et galicien.',
-      'contact.title': 'Vous gérez un système de rendez-vous ou de réservation ?',
-      'contact.lead': 'Nous aimerions nous intégrer de la manière que vous préférez : une API officielle, un accord ou une autorisation aux conditions que vous fixez. Nous vous expliquons en détail ce que nous consulterions, à quelle fréquence et comment nous nous identifions.',
-      'contact.cta': 'Écrivez-nous',
       'footer.note': 'Unhuequín est un projet indépendant. Il n’est affilié à aucune administration publique ni à aucune entreprise de rendez-vous ou de réservation, et ne réserve pour le compte de personne.',
     },
 
@@ -127,14 +121,14 @@
       'brand.aria': 'Unhuequín, Startseite', 'nav.aria': 'Abschnitte', 'nav.how': 'So funktioniert’s', 'nav.owners': 'Für Anbieter',
       'nav.commit': 'Grundsätze', 'nav.contact': 'Kontakt', 'lang.aria': 'Sprache',
       'hero.eyebrow': 'Unabhängiges Projekt',
-      'hero.title': 'Wir sagen Bescheid, wenn <mark>ein Platz</mark> frei wird.',
-      'hero.lead': 'Unhuequín schickt eine E-Mail, sobald bei Diensten mit begrenzten Terminen oder Reservierungen ein Platz frei wird: ein abgesagter Termin, ein Tisch, der frei wird. <strong>Wir benachrichtigen nur</strong>: Gebucht wird immer über den offiziellen Kanal des Anbieters.',
+      'hero.title': 'Wir sagen Bescheid, sobald <mark>ein Platz</mark> frei ist.',
+      'hero.lead': 'Unhuequín schickt eine E-Mail, sobald bei Diensten mit begrenzten Terminen oder Reservierungen ein Platz frei ist: ein abgesagter Termin, neu freigeschaltete Termine, ein Tisch, der frei wird. <strong>Wir benachrichtigen nur</strong>: Gebucht wird immer über den offiziellen Kanal des Anbieters.',
       'hero.cta': 'Sprechen wir', 'hero.cta2': 'Unser Umgang mit Datenquellen',
-      'mail.aria': 'Beispiel einer Benachrichtigung: Ein passender Platz ist frei geworden, mit einer Schaltfläche zur Buchung auf der offiziellen Website.',
-      'mail.time': 'Gerade eben', 'mail.title': 'Ein Platz ist frei geworden', 'mail.day': 'Donnerstag, 16.', 'mail.tag': 'Passt',
+      'mail.aria': 'Beispiel einer Benachrichtigung: Ein passender Platz ist frei, mit einer Schaltfläche zur Buchung auf der offiziellen Website.',
+      'mail.time': 'Gerade eben', 'mail.title': 'Ein Platz ist frei', 'mail.day': 'Donnerstag, 16.', 'mail.tag': 'Passt',
       'mail.cta': 'Auf der offiziellen Website buchen →', 'mail.note': 'Beispiel zur Veranschaulichung',
       'prob.kicker': 'Das Problem', 'prob.title': 'Plätze werden frei, aber kaum jemand erfährt es rechtzeitig.',
-      'prob.lead': 'Ist ein Dienst mit begrenzten Plätzen ausgebucht, bleibt nur, immer wieder nachzusehen und auf eine Absage zu hoffen.',
+      'prob.lead': 'Ist ein Dienst mit begrenzten Plätzen ausgebucht, bleibt nur, immer wieder nachzusehen und auf eine Absage oder neue Termine zu hoffen.',
       'prob.1t': 'Ständiges Nachsehen', 'prob.1p': 'Viele laden tagelang dieselbe Seite neu. Für den Anbieter ist das nutzloser Traffic, für sie verlorene Zeit.',
       'prob.2t': 'Verlorene Plätze', 'prob.2p': 'Eine kurzfristige Absage bleibt oft leer, obwohl jemand den Platz gern genommen hätte.',
       'prob.3t': 'Zweifelhafte Vermittler', 'prob.3p': 'Knappheit lockt Websites an, die Geld dafür verlangen, Plätze zu „besorgen“, oder sich als offizieller Kanal ausgeben.',
@@ -170,9 +164,6 @@
       'state.1t': 'Kostenlos für Nutzer', 'state.1p': 'Solange wir prüfen, ob die Benachrichtigungen nützlich sind. Für Termin oder Buchung verlangen wir nie Geld.',
       'state.2t': 'Dienste in Vorbereitung', 'state.2p': 'Termine für stark nachgefragte Dienste und Restaurantreservierungen – überall dort, wo Plätze frei werden.',
       'state.3t': 'Der Dienst in sechs Sprachen', 'state.3p': 'Spanisch, Valencianisch, Katalanisch, Englisch, Baskisch und Galicisch.',
-      'contact.title': 'Sie betreiben ein Termin- oder Buchungssystem?',
-      'contact.lead': 'Wir möchten uns so anbinden, wie es Ihnen am liebsten ist: über eine offizielle API, eine Vereinbarung oder eine Erlaubnis zu Ihren Bedingungen. Wir erklären Ihnen genau, was wir abfragen würden, wie oft und wie wir uns zu erkennen geben.',
-      'contact.cta': 'Schreiben Sie uns',
       'footer.note': 'Unhuequín ist ein unabhängiges Projekt. Es ist mit keiner Behörde und keinem Termin- oder Buchungsunternehmen verbunden und bucht nicht im Namen anderer.',
     },
 
@@ -180,14 +171,14 @@
       'brand.aria': 'Unhuequín, home', 'nav.aria': 'Sezioni', 'nav.how': 'Come funziona', 'nav.owners': 'Per i gestori',
       'nav.commit': 'Impegni', 'nav.contact': 'Contatti', 'lang.aria': 'Lingua',
       'hero.eyebrow': 'Progetto indipendente',
-      'hero.title': 'Ti avvisiamo quando si libera <mark>un posto</mark>.',
-      'hero.lead': 'Unhuequín invia un’e-mail quando si libera un posto in servizi con appuntamenti o prenotazioni limitati: un appuntamento che qualcuno annulla, un tavolo che si libera. <strong>Ci limitiamo ad avvisare</strong>: la prenotazione si fa sempre sul canale ufficiale del gestore.',
+      'hero.title': 'Ti avvisiamo quando c’è <mark>un posto</mark>.',
+      'hero.lead': 'Unhuequín invia un’e-mail quando c’è un posto libero in servizi con appuntamenti o prenotazioni limitati: un appuntamento che qualcuno annulla, nuove date che si aprono, un tavolo che si libera. <strong>Ci limitiamo ad avvisare</strong>: la prenotazione si fa sempre sul canale ufficiale del gestore.',
       'hero.cta': 'Parliamone', 'hero.cta2': 'Come trattiamo le fonti',
-      'mail.aria': 'Esempio di e-mail di avviso: si è liberato un posto adatto alla tua ricerca, con un pulsante per prenotare sul sito ufficiale.',
-      'mail.time': 'Proprio ora', 'mail.title': 'Si è liberato un posto', 'mail.day': 'Giovedì 16', 'mail.tag': 'Adatto',
+      'mail.aria': 'Esempio di e-mail di avviso: c’è un posto adatto alla tua ricerca, con un pulsante per prenotare sul sito ufficiale.',
+      'mail.time': 'Proprio ora', 'mail.title': 'C’è un posto per te', 'mail.day': 'Giovedì 16', 'mail.tag': 'Adatto',
       'mail.cta': 'Prenota sul sito ufficiale →', 'mail.note': 'Esempio illustrativo',
-      'prob.kicker': 'Il problema', 'prob.title': 'I posti si liberano, ma quasi nessuno lo scopre in tempo.',
-      'prob.lead': 'Quando un servizio a posti limitati è al completo, l’unico modo per trovare posto è controllare più e più volte, sperando in una disdetta.',
+      'prob.kicker': 'Il problema', 'prob.title': 'I posti compaiono, ma quasi nessuno lo scopre in tempo.',
+      'prob.lead': 'Quando un servizio a posti limitati è al completo, l’unico modo per trovare posto è controllare più e più volte, sperando in una disdetta o in nuove date.',
       'prob.1t': 'Controlli ripetuti', 'prob.1p': 'Molte persone ricaricano la stessa pagina per giorni. Per il gestore è traffico inutile; per loro, tempo perso.',
       'prob.2t': 'Posti persi', 'prob.2p': 'Una disdetta dell’ultimo minuto spesso resta vuota, anche se qualcuno l’avrebbe presa.',
       'prob.3t': 'Intermediari poco affidabili', 'prob.3p': 'La scarsità attira siti che si fanno pagare per «ottenere» posti o si spacciano per il canale ufficiale.',
@@ -223,9 +214,6 @@
       'state.1t': 'Gratuito per le persone', 'state.1p': 'Mentre verifichiamo che gli avvisi siano utili. Non facciamo mai pagare l’appuntamento né la prenotazione.',
       'state.2t': 'Servizi in preparazione', 'state.2p': 'Appuntamenti per servizi molto richiesti e prenotazioni al ristorante, ovunque ci siano posti che si liberano.',
       'state.3t': 'Il servizio, in sei lingue', 'state.3p': 'Spagnolo, valenciano, catalano, inglese, basco e galiziano.',
-      'contact.title': 'Gestisci un sistema di appuntamenti o prenotazioni?',
-      'contact.lead': 'Vorremmo integrarci nel modo che preferisci: un’API ufficiale, un accordo o un permesso alle condizioni che stabilisci. Ti spieghiamo nel dettaglio cosa consulteremmo, con quale frequenza e come ci identifichiamo.',
-      'contact.cta': 'Scrivici',
       'footer.note': 'Unhuequín è un progetto indipendente. Non è affiliato ad alcuna amministrazione pubblica né ad alcuna azienda di appuntamenti o prenotazioni, e non prenota per conto di nessuno.',
     },
 
@@ -233,14 +221,14 @@
       'brand.aria': 'Unhuequín, início', 'nav.aria': 'Secções', 'nav.how': 'Como funciona', 'nav.owners': 'Para gestores',
       'nav.commit': 'Compromissos', 'nav.contact': 'Contacto', 'lang.aria': 'Idioma',
       'hero.eyebrow': 'Projeto independente',
-      'hero.title': 'Avisamos quando surge <mark>uma vaga</mark>.',
-      'hero.lead': 'O Unhuequín envia um e-mail quando fica disponível uma vaga em serviços com marcação ou reserva limitada: uma marcação que alguém cancela, uma mesa que fica livre. <strong>Só avisamos</strong>: a reserva faz-se sempre no canal oficial do gestor.',
+      'hero.title': 'Avisamos quando houver <mark>uma vaga</mark>.',
+      'hero.lead': 'O Unhuequín envia um e-mail quando há uma vaga em serviços com marcação ou reserva limitada: uma marcação que alguém cancela, novas datas que abrem, uma mesa que fica livre. <strong>Só avisamos</strong>: a reserva faz-se sempre no canal oficial do gestor.',
       'hero.cta': 'Vamos falar', 'hero.cta2': 'Como tratamos as fontes',
-      'mail.aria': 'Exemplo de e-mail de aviso: surgiu uma vaga que corresponde à sua pesquisa, com um botão para reservar no site oficial.',
-      'mail.time': 'Agora mesmo', 'mail.title': 'Surgiu uma vaga', 'mail.day': 'Quinta-feira, 16', 'mail.tag': 'Serve',
+      'mail.aria': 'Exemplo de e-mail de aviso: há uma vaga que corresponde à sua pesquisa, com um botão para reservar no site oficial.',
+      'mail.time': 'Agora mesmo', 'mail.title': 'Há uma vaga para si', 'mail.day': 'Quinta-feira, 16', 'mail.tag': 'Serve',
       'mail.cta': 'Reservar no site oficial →', 'mail.note': 'Exemplo ilustrativo',
-      'prob.kicker': 'O problema', 'prob.title': 'As vagas surgem, mas quase ninguém sabe a tempo.',
-      'prob.lead': 'Quando um serviço com vagas limitadas esgota, a única forma de conseguir lugar é voltar a ver vezes sem conta, à espera de que alguém cancele.',
+      'prob.kicker': 'O problema', 'prob.title': 'As vagas aparecem, mas quase ninguém sabe a tempo.',
+      'prob.lead': 'Quando um serviço com vagas limitadas esgota, a única forma de conseguir lugar é voltar a ver vezes sem conta, à espera de que alguém cancele ou abram novas datas.',
       'prob.1t': 'Consultas repetidas', 'prob.1p': 'Muitas pessoas recarregam a mesma página durante dias. Para o gestor é tráfego inútil; para elas, tempo perdido.',
       'prob.2t': 'Vagas que se perdem', 'prob.2p': 'Um cancelamento de última hora fica muitas vezes vazio, embora houvesse quem o aproveitasse.',
       'prob.3t': 'Intermediários duvidosos', 'prob.3p': 'A escassez atrai sites que cobram para «conseguir» vagas ou se fazem passar pelo canal oficial.',
@@ -276,9 +264,6 @@
       'state.1t': 'Gratuito para as pessoas', 'state.1p': 'Enquanto confirmamos que os avisos são úteis. Nunca cobramos pela marcação nem pela reserva.',
       'state.2t': 'Serviços em preparação', 'state.2p': 'Marcações em serviços muito procurados e reservas em restaurantes, onde quer que haja vagas que se libertam.',
       'state.3t': 'O serviço, em seis línguas', 'state.3p': 'Espanhol, valenciano, catalão, inglês, basco e galego.',
-      'contact.title': 'Gere um sistema de marcações ou reservas?',
-      'contact.lead': 'Gostaríamos de nos integrar da forma que preferir: uma API oficial, um acordo ou uma autorização nas condições que definir. Explicamos em detalhe o que consultaríamos, com que frequência e como nos identificamos.',
-      'contact.cta': 'Escreva-nos',
       'footer.note': 'O Unhuequín é um projeto independente. Não está afiliado a nenhuma administração pública nem a nenhuma empresa de marcações ou reservas, e não faz reservas em nome de ninguém.',
     },
 
@@ -286,14 +271,14 @@
       'brand.aria': 'Unhuequín, inici', 'nav.aria': 'Seccions', 'nav.how': 'Com funciona', 'nav.owners': 'Per a titulars',
       'nav.commit': 'Compromisos', 'nav.contact': 'Contacte', 'lang.aria': 'Idioma',
       'hero.eyebrow': 'Projecte independent',
-      'hero.title': 'T’avisem quan s’allibera <mark>un foradet</mark>.',
-      'hero.lead': 'Unhuequín avisa per correu electrònic quan apareix una plaça lliure en serveis amb cita o reserva limitada: una cita que algú anul·la, una taula que queda lliure. <strong>Només avisem</strong>: la reserva es fa sempre al canal oficial del titular.',
+      'hero.title': 'T’avisem quan hi hagi <mark>un foradet</mark>.',
+      'hero.lead': 'Unhuequín avisa per correu electrònic quan hi ha una plaça lliure en serveis amb cita o reserva limitada: una cita que algú anul·la, dates noves que s’obren, una taula que queda lliure. <strong>Només avisem</strong>: la reserva es fa sempre al canal oficial del titular.',
       'hero.cta': 'Parlem-ne', 'hero.cta2': 'Com tractem les fonts',
-      'mail.aria': 'Exemple de correu d’avís: s’ha alliberat un forat que encaixa amb el que busques, amb un botó per reservar al web oficial.',
-      'mail.time': 'Ara mateix', 'mail.title': 'S’ha alliberat un foradet', 'mail.day': 'Dijous 16', 'mail.tag': 'Encaixa',
+      'mail.aria': 'Exemple de correu d’avís: hi ha un forat que encaixa amb el que busques, amb un botó per reservar al web oficial.',
+      'mail.time': 'Ara mateix', 'mail.title': 'Hi ha un foradet per a tu', 'mail.day': 'Dijous 16', 'mail.tag': 'Encaixa',
       'mail.cta': 'Reserva al web oficial →', 'mail.note': 'Exemple il·lustratiu',
-      'prob.kicker': 'El problema', 'prob.title': 'Els forats s’alliberen, però gairebé ningú se n’assabenta a temps.',
-      'prob.lead': 'Quan un servei amb places limitades s’omple, l’única manera d’aconseguir lloc és tornar a mirar una vegada i una altra, esperant que algú anul·li.',
+      'prob.kicker': 'El problema', 'prob.title': 'Els forats apareixen, però gairebé ningú se n’assabenta a temps.',
+      'prob.lead': 'Quan un servei amb places limitades s’omple, l’única manera d’aconseguir lloc és tornar a mirar una vegada i una altra, esperant que algú anul·li o s’obrin dates noves.',
       'prob.1t': 'Consultes repetides', 'prob.1p': 'Moltes persones recarreguen la mateixa pàgina durant dies. Per al titular és trànsit inútil; per a elles, temps perdut.',
       'prob.2t': 'Places que es perden', 'prob.2p': 'Una anul·lació d’última hora sovint queda buida, tot i que hi hauria algú que l’hauria aprofitada.',
       'prob.3t': 'Intermediaris dubtosos', 'prob.3p': 'L’escassetat atreu webs que cobren per «aconseguir» places o que es fan passar pel canal oficial.',
@@ -329,9 +314,6 @@
       'state.1t': 'Gratuït per a les persones', 'state.1p': 'Mentre validem que l’avís és útil. Mai no cobrem per la cita ni per la reserva.',
       'state.2t': 'Serveis en preparació', 'state.2p': 'Cites de serveis amb molta demanda i reserves de restaurant, allà on hi hagi places que s’alliberen.',
       'state.3t': 'El servei, en sis idiomes', 'state.3p': 'Castellà, valencià, català, anglès, basc i gallec.',
-      'contact.title': 'Gestiones un sistema de cites o de reserves?',
-      'contact.lead': 'Ens agradaria integrar-nos per la via que prefereixis: una API oficial, un acord o un permís amb les condicions que fixis. T’expliquem amb detall què consultaríem, amb quina freqüència i com ens identifiquem.',
-      'contact.cta': 'Escriu-nos',
       'footer.note': 'Unhuequín és un projecte independent. No està afiliat a cap administració pública ni a cap empresa de cites o reserves, i no gestiona reserves en nom de ningú.',
     },
 
@@ -339,14 +321,14 @@
       'brand.aria': 'Unhuequín, inici', 'nav.aria': 'Seccions', 'nav.how': 'Com funciona', 'nav.owners': 'Per a titulars',
       'nav.commit': 'Compromisos', 'nav.contact': 'Contacte', 'lang.aria': 'Idioma',
       'hero.eyebrow': 'Projecte independent',
-      'hero.title': 'T’avisem quan s’allibera <mark>un foradet</mark>.',
-      'hero.lead': 'Unhuequín avisa per correu electrònic quan apareix una plaça lliure en servicis amb cita o reserva limitada: una cita que algú anul·la, una taula que es queda lliure. <strong>Només avisem</strong>: la reserva es fa sempre en el canal oficial del titular.',
+      'hero.title': 'T’avisem quan hi haja <mark>un foradet</mark>.',
+      'hero.lead': 'Unhuequín avisa per correu electrònic quan hi ha una plaça lliure en servicis amb cita o reserva limitada: una cita que algú anul·la, dates noves que s’obrin, una taula que es queda lliure. <strong>Només avisem</strong>: la reserva es fa sempre en el canal oficial del titular.',
       'hero.cta': 'Parlem-ne', 'hero.cta2': 'Com tractem les fonts',
-      'mail.aria': 'Exemple de correu d’avís: s’ha alliberat un forat que encaixa amb el que busques, amb un botó per a reservar en la web oficial.',
-      'mail.time': 'Ara mateix', 'mail.title': 'S’ha alliberat un foradet', 'mail.day': 'Dijous 16', 'mail.tag': 'Encaixa',
+      'mail.aria': 'Exemple de correu d’avís: hi ha un forat que encaixa amb el que busques, amb un botó per a reservar en la web oficial.',
+      'mail.time': 'Ara mateix', 'mail.title': 'Hi ha un foradet per a tu', 'mail.day': 'Dijous 16', 'mail.tag': 'Encaixa',
       'mail.cta': 'Reserva en la web oficial →', 'mail.note': 'Exemple il·lustratiu',
-      'prob.kicker': 'El problema', 'prob.title': 'Els forats s’alliberen, però quasi ningú se n’assabenta a temps.',
-      'prob.lead': 'Quan un servici amb places limitades s’ompli, l’única manera d’aconseguir lloc és tornar a mirar una vegada i una altra, esperant que algú anul·le.',
+      'prob.kicker': 'El problema', 'prob.title': 'Els forats apareixen, però quasi ningú se n’assabenta a temps.',
+      'prob.lead': 'Quan un servici amb places limitades s’ompli, l’única manera d’aconseguir lloc és tornar a mirar una vegada i una altra, esperant que algú anul·le o s’obrin dates noves.',
       'prob.1t': 'Consultes repetides', 'prob.1p': 'Moltes persones recarreguen la mateixa pàgina durant dies. Per al titular és trànsit inútil; per a elles, temps perdut.',
       'prob.2t': 'Places que es perden', 'prob.2p': 'Una anul·lació d’última hora moltes vegades es queda buida, encara que hi haja algú que l’hauria aprofitada.',
       'prob.3t': 'Intermediaris dubtosos', 'prob.3p': 'L’escassetat atrau webs que cobren per «aconseguir» places o que es fan passar pel canal oficial.',
@@ -382,9 +364,6 @@
       'state.1t': 'Gratuït per a les persones', 'state.1p': 'Mentres validem que l’avís és útil. Mai cobrem per la cita ni per la reserva.',
       'state.2t': 'Servicis en preparació', 'state.2p': 'Cites de servicis amb molta demanda i reserves de restaurant, allà on hi haja places que s’alliberen.',
       'state.3t': 'El servici, en sis idiomes', 'state.3p': 'Castellà, valencià, català, anglés, basc i gallec.',
-      'contact.title': 'Gestiones un sistema de cites o de reserves?',
-      'contact.lead': 'Ens agradaria integrar-nos per la via que preferisques: una API oficial, un acord o un permís amb les condicions que fixes. T’expliquem amb detall què consultaríem, amb quina freqüència i com ens identifiquem.',
-      'contact.cta': 'Escriu-nos',
       'footer.note': 'Unhuequín és un projecte independent. No està afiliat a cap administració pública ni a cap empresa de cites o reserves, i no gestiona reserves en nom de ningú.',
     },
 
@@ -392,14 +371,14 @@
       'brand.aria': 'Unhuequín, hasiera', 'nav.aria': 'Atalak', 'nav.how': 'Nola dabil', 'nav.owners': 'Titularrentzat',
       'nav.commit': 'Konpromisoak', 'nav.contact': 'Harremanetarako', 'lang.aria': 'Hizkuntza',
       'hero.eyebrow': 'Proiektu independentea',
-      'hero.title': '<mark>Leku bat</mark> libratzen denean abisatzen dizugu.',
-      'hero.lead': 'Unhuequín-ek mezu elektroniko bat bidaltzen du hitzordu edo erreserba mugatuko zerbitzuetan leku libre bat agertzen denean: norbaitek bertan behera utzitako hitzordu bat, libre geratzen den mahai bat. <strong>Abisatu besterik ez dugu egiten</strong>: erreserba titularraren kanal ofizialean egiten da beti.',
+      'hero.title': '<mark>Leku bat</mark> dagoenean abisatzen dizugu.',
+      'hero.lead': 'Unhuequín-ek mezu elektroniko bat bidaltzen du hitzordu edo erreserba mugatuko zerbitzuetan leku libre bat dagoenean: norbaitek bertan behera utzitako hitzordu bat, irekitzen diren data berriak, libre geratzen den mahai bat. <strong>Abisatu besterik ez dugu egiten</strong>: erreserba titularraren kanal ofizialean egiten da beti.',
       'hero.cta': 'Hitz egin dezagun', 'hero.cta2': 'Nola tratatzen ditugun iturriak',
-      'mail.aria': 'Abisu-mezuaren adibidea: bilatzen duzunarekin bat datorren leku bat libratu da, eta webgune ofizialean erreserbatzeko botoi bat dago.',
-      'mail.time': 'Oraintxe', 'mail.title': 'Leku bat libratu da', 'mail.day': 'Osteguna, 16', 'mail.tag': 'Bat dator',
+      'mail.aria': 'Abisu-mezuaren adibidea: bilatzen duzunarekin bat datorren leku bat dago, eta webgune ofizialean erreserbatzeko botoi bat dago.',
+      'mail.time': 'Oraintxe', 'mail.title': 'Leku bat dago zuretzat', 'mail.day': 'Osteguna, 16', 'mail.tag': 'Bat dator',
       'mail.cta': 'Erreserbatu webgune ofizialean →', 'mail.note': 'Adibide ilustratzailea',
-      'prob.kicker': 'Arazoa', 'prob.title': 'Lekuak libratzen dira, baina ia inor ez da garaiz enteratzen.',
-      'prob.lead': 'Leku mugatuko zerbitzu bat betetzen denean, lekua lortzeko modu bakarra behin eta berriz begiratzea da, norbaitek bertan behera uztearen zain.',
+      'prob.kicker': 'Arazoa', 'prob.title': 'Lekuak agertzen dira, baina ia inor ez da garaiz enteratzen.',
+      'prob.lead': 'Leku mugatuko zerbitzu bat betetzen denean, lekua lortzeko modu bakarra behin eta berriz begiratzea da, norbaitek bertan behera utzi edo data berriak ireki arte.',
       'prob.1t': 'Kontsulta errepikatuak', 'prob.1p': 'Jende askok orri bera kargatzen du behin eta berriz egunetan zehar. Titularrarentzat alferrikako trafikoa da; haientzat, denbora galdua.',
       'prob.2t': 'Galtzen diren lekuak', 'prob.2p': 'Azken orduko ezeztapen bat askotan hutsik geratzen da, nahiz eta norbaitek aprobetxatuko zukeen.',
       'prob.3t': 'Bitartekari zalantzagarriak', 'prob.3p': 'Eskasiak lekuak «lortzeagatik» kobratzen duten edo kanal ofizialaren itxura egiten duten webguneak erakartzen ditu.',
@@ -435,9 +414,6 @@
       'state.1t': 'Doakoa pertsonentzat', 'state.1p': 'Abisua erabilgarria dela egiaztatzen dugun bitartean. Ez dugu inoiz hitzorduagatik edo erreserbagatik kobratzen.',
       'state.2t': 'Prestatzen ari garen zerbitzuak', 'state.2p': 'Eskari handiko zerbitzuetako hitzorduak eta jatetxeetako erreserbak, libratzen diren lekuak dauden tokietan.',
       'state.3t': 'Zerbitzua, sei hizkuntzatan', 'state.3p': 'Gaztelania, valentziera, katalana, ingelesa, euskara eta galiziera.',
-      'contact.title': 'Hitzordu- edo erreserba-sistema bat kudeatzen duzu?',
-      'contact.lead': 'Nahiago duzun bidetik integratu nahiko genuke: API ofizial bat, akordio bat edo zuk ezarritako baldintzekin baimen bat. Zehatz azalduko dizugu zer kontsultatuko genukeen, zein maiztasunekin eta nola identifikatzen garen.',
-      'contact.cta': 'Idatzi iezaguzu',
       'footer.note': 'Unhuequín proiektu independentea da. Ez dago lotuta inongo administrazio publikorekin ezta hitzordu- edo erreserba-enpresarekin ere, eta ez du inoren izenean erreserbarik kudeatzen.',
     },
 
@@ -445,14 +421,14 @@
       'brand.aria': 'Unhuequín, inicio', 'nav.aria': 'Seccións', 'nav.how': 'Como funciona', 'nav.owners': 'Para titulares',
       'nav.commit': 'Compromisos', 'nav.contact': 'Contacto', 'lang.aria': 'Idioma',
       'hero.eyebrow': 'Proxecto independente',
-      'hero.title': 'Avisámoste cando se libera <mark>un oquiño</mark>.',
-      'hero.lead': 'Unhuequín avisa por correo electrónico cando aparece unha praza libre en servizos con cita ou reserva limitada: unha cita que alguén anula, unha mesa que queda libre. <strong>Só avisamos</strong>: a reserva faise sempre na canle oficial do titular.',
+      'hero.title': 'Avisámoste cando haxa <mark>un oquiño</mark>.',
+      'hero.lead': 'Unhuequín avisa por correo electrónico cando hai unha praza libre en servizos con cita ou reserva limitada: unha cita que alguén anula, datas novas que se abren, unha mesa que queda libre. <strong>Só avisamos</strong>: a reserva faise sempre na canle oficial do titular.',
       'hero.cta': 'Falemos', 'hero.cta2': 'Como tratamos as fontes',
-      'mail.aria': 'Exemplo de correo de aviso: liberouse un oco que encaixa co que buscas, cun botón para reservar na web oficial.',
-      'mail.time': 'Agora mesmo', 'mail.title': 'Liberouse un oquiño', 'mail.day': 'Xoves 16', 'mail.tag': 'Encaixa',
+      'mail.aria': 'Exemplo de correo de aviso: hai un oco que encaixa co que buscas, cun botón para reservar na web oficial.',
+      'mail.time': 'Agora mesmo', 'mail.title': 'Hai un oquiño para ti', 'mail.day': 'Xoves 16', 'mail.tag': 'Encaixa',
       'mail.cta': 'Reservar na web oficial →', 'mail.note': 'Exemplo ilustrativo',
-      'prob.kicker': 'O problema', 'prob.title': 'Os ocos libéranse, pero case ninguén se decata a tempo.',
-      'prob.lead': 'Cando un servizo con prazas limitadas se enche, a única forma de conseguir sitio é volver mirar unha e outra vez, agardando a que alguén anule.',
+      'prob.kicker': 'O problema', 'prob.title': 'Os ocos aparecen, pero case ninguén se decata a tempo.',
+      'prob.lead': 'Cando un servizo con prazas limitadas se enche, a única forma de conseguir sitio é volver mirar unha e outra vez, agardando a que alguén anule ou se abran novas datas.',
       'prob.1t': 'Consultas repetidas', 'prob.1p': 'Moitas persoas recargan a mesma páxina durante días. Para o titular é tráfico inútil; para elas, tempo perdido.',
       'prob.2t': 'Prazas que se perden', 'prob.2p': 'Unha anulación de última hora adoita quedar baleira, aínda que houbese alguén que a aproveitaría.',
       'prob.3t': 'Intermediarios dubidosos', 'prob.3p': 'A escaseza atrae webs que cobran por «conseguir» prazas ou se fan pasar pola canle oficial.',
@@ -488,14 +464,45 @@
       'state.1t': 'Gratuíto para as persoas', 'state.1p': 'Mentres validamos que o aviso é útil. Nunca cobramos pola cita nin pola reserva.',
       'state.2t': 'Servizos en preparación', 'state.2p': 'Citas de servizos con moita demanda e reservas de restaurante, alí onde haxa prazas que se liberan.',
       'state.3t': 'O servizo, en seis idiomas', 'state.3p': 'Castelán, valenciano, catalán, inglés, éuscaro e galego.',
-      'contact.title': 'Xestionas un sistema de citas ou de reservas?',
-      'contact.lead': 'Gustaríanos integrarnos pola vía que prefiras: unha API oficial, un acordo ou un permiso coas condicións que fixes. Contámosche con detalle que consultariamos, con que frecuencia e como nos identificamos.',
-      'contact.cta': 'Escríbenos',
       'footer.note': 'Unhuequín é un proxecto independente. Non está afiliado a ningunha administración pública nin a ningunha empresa de citas ou reservas, e non xestiona reservas en nome de ninguén.',
     },
   };
 
-  var nodes = document.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-aria]');
+  /** Bloque de empresas y mensajes del formulario. `es`, solo los mensajes que muestra el script (el resto está en el HTML). */
+  var FORM = {
+    es: {"form.sending": "Enviando…", "form.empty": "Cuéntanos algo o marca al menos una opción.", "form.error": "No hemos podido enviarlo. Inténtalo de nuevo o escríbenos a info@unhuequin.com.", "form.tooMany": "Has enviado varios mensajes seguidos. Espera un rato y vuelve a intentarlo."},
+    en: {"contact.title": "Do you run an appointment or booking system?", "contact.lead": "We would like to integrate in whatever way you prefer: an official API, an agreement or a permission under the conditions you set. We’ll explain in detail what we would query, how often and how we identify ourselves.", "contact.cta": "Write to us", "form.sending": "Sending…", "form.empty": "Tell us something or choose at least one option.", "form.error": "We couldn’t send it. Please try again or write to info@unhuequin.com.", "form.tooMany": "You’ve sent several messages in a row. Please wait a while and try again."},
+    fr: {"contact.title": "Vous gérez un système de rendez-vous ou de réservation ?", "contact.lead": "Nous aimerions nous intégrer de la manière que vous préférez : une API officielle, un accord ou une autorisation aux conditions que vous fixez. Nous vous expliquons en détail ce que nous consulterions, à quelle fréquence et comment nous nous identifions.", "contact.cta": "Écrivez-nous", "form.sending": "Envoi…", "form.empty": "Dites-nous quelque chose ou cochez au moins une option.", "form.error": "Nous n’avons pas pu l’envoyer. Réessayez ou écrivez à info@unhuequin.com.", "form.tooMany": "Vous avez envoyé plusieurs messages d’affilée. Patientez un peu et réessayez."},
+    de: {"contact.title": "Sie betreiben ein Termin- oder Buchungssystem?", "contact.lead": "Wir möchten uns so anbinden, wie es Ihnen am liebsten ist: über eine offizielle API, eine Vereinbarung oder eine Erlaubnis zu Ihren Bedingungen. Wir erklären Ihnen genau, was wir abfragen würden, wie oft und wie wir uns zu erkennen geben.", "contact.cta": "Schreiben Sie uns", "form.sending": "Wird gesendet …", "form.empty": "Schreiben Sie uns etwas oder wählen Sie mindestens eine Option.", "form.error": "Das Senden hat nicht geklappt. Versuchen Sie es erneut oder schreiben Sie an info@unhuequin.com.", "form.tooMany": "Sie haben mehrere Nachrichten hintereinander gesendet. Bitte warten Sie etwas und versuchen Sie es dann erneut."},
+    it: {"contact.title": "Gestisci un sistema di appuntamenti o prenotazioni?", "contact.lead": "Vorremmo integrarci nel modo che preferisci: un’API ufficiale, un accordo o un permesso alle condizioni che stabilisci. Ti spieghiamo nel dettaglio cosa consulteremmo, con quale frequenza e come ci identifichiamo.", "contact.cta": "Scrivici", "form.sending": "Invio in corso…", "form.empty": "Raccontaci qualcosa o scegli almeno un’opzione.", "form.error": "Non siamo riusciti a inviarlo. Riprova o scrivi a info@unhuequin.com.", "form.tooMany": "Hai inviato diversi messaggi di seguito. Attendi un po’ e riprova."},
+    pt: {"contact.title": "Gere um sistema de marcações ou reservas?", "contact.lead": "Gostaríamos de nos integrar da forma que preferir: uma API oficial, um acordo ou uma autorização nas condições que definir. Explicamos em detalhe o que consultaríamos, com que frequência e como nos identificamos.", "contact.cta": "Escreva-nos", "form.sending": "A enviar…", "form.empty": "Conte-nos algo ou escolha pelo menos uma opção.", "form.error": "Não foi possível enviar. Tente novamente ou escreva para info@unhuequin.com.", "form.tooMany": "Enviou várias mensagens seguidas. Aguarde um pouco e tente novamente."},
+    ca: {"contact.title": "Gestiones un sistema de cites o de reserves?", "contact.lead": "Ens agradaria integrar-nos per la via que prefereixis: una API oficial, un acord o un permís amb les condicions que fixis. T’expliquem amb detall què consultaríem, amb quina freqüència i com ens identifiquem.", "contact.cta": "Escriu-nos", "form.sending": "S’està enviant…", "form.empty": "Explica’ns alguna cosa o marca almenys una opció.", "form.error": "No l’hem pogut enviar. Torna-ho a provar o escriu-nos a info@unhuequin.com.", "form.tooMany": "Has enviat diversos missatges seguits. Espera una estona i torna-ho a provar."},
+    va: {"contact.title": "Gestiones un sistema de cites o de reserves?", "contact.lead": "Ens agradaria integrar-nos per la via que preferisques: una API oficial, un acord o un permís amb les condicions que fixes. T’expliquem amb detall què consultaríem, amb quina freqüència i com ens identifiquem.", "contact.cta": "Escriu-nos", "form.sending": "S’està enviant…", "form.empty": "Conta’ns alguna cosa o marca almenys una opció.", "form.error": "No l’hem pogut enviar. Torna-ho a provar o escriu-nos a info@unhuequin.com.", "form.tooMany": "Has enviat diversos missatges seguits. Espera una estona i torna-ho a provar."},
+    eu: {"contact.title": "Hitzordu- edo erreserba-sistema bat kudeatzen duzu?", "contact.lead": "Nahiago duzun bidetik integratu nahiko genuke: API ofizial bat, akordio bat edo zuk ezarritako baldintzekin baimen bat. Zehatz azalduko dizugu zer kontsultatuko genukeen, zein maiztasunekin eta nola identifikatzen garen.", "contact.cta": "Idatzi iezaguzu", "form.sending": "Bidaltzen…", "form.empty": "Konta iezaguzu zerbait edo hautatu aukera bat gutxienez.", "form.error": "Ezin izan dugu bidali. Saiatu berriro edo idatzi info@unhuequin.com helbidera.", "form.tooMany": "Hainbat mezu bidali dituzu jarraian. Itxaron pixka bat eta saiatu berriro."},
+    gl: {"contact.title": "Xestionas un sistema de citas ou de reservas?", "contact.lead": "Gustaríanos integrarnos pola vía que prefiras: unha API oficial, un acordo ou un permiso coas condicións que fixes. Contámosche con detalle que consultariamos, con que frecuencia e como nos identificamos.", "contact.cta": "Escríbenos", "form.sending": "Enviando…", "form.empty": "Cóntanos algo ou marca polo menos unha opción.", "form.error": "Non puidemos envialo. Téntao de novo ou escríbenos a info@unhuequin.com.", "form.tooMany": "Enviaches varias mensaxes seguidas. Agarda un pouco e téntao de novo."},
+  };
+  Object.keys(FORM).forEach(function (lang) {
+    if (lang === 'es') return;
+    Object.keys(FORM[lang]).forEach(function (key) { T[lang][key] = FORM[lang][key]; });
+  });
+
+  /** Sección de usuarios y antetítulo de la de empresas (el castellano está en el HTML). */
+  var USERS = {
+    en: {"contact.kicker": "For businesses", "user.kicker": "Looking for a spot?", "user.title": "What would you like us to alert you about?", "user.lead": "We are starting with only a few services. Tell us what would help you: your answers decide what we build next.", "uform.services": "What would you like alerts for? (choose any)", "svc.events": "Event tickets", "svc.courses": "Courses, workshops and camps", "svc.stay": "Accommodation: hotels and rural houses", "svc.itv": "Vehicle inspection appointment", "svc.rest": "A table at a restaurant", "svc.sport": "Padel or tennis courts", "svc.beauty": "Hairdresser and beauty", "svc.clinic": "Private clinics and consultations", "svc.activities": "Activities and visits with limited places", "uform.other": "Something else", "uform.otherPh": "Academy, gym, vet…", "uform.region": "Which city or country?", "uform.regionPh": "For example: Valencia, Madrid, Lisbon…", "uform.channel": "How would you prefer to receive alerts?", "ch.email": "Email", "ch.push": "Push notification", "uform.message": "Anything else you’d like to tell us?", "uform.messagePh": "What you’re missing, when it happened to you…", "uform.note": "It’s anonymous: we don’t ask for your email or any contact details. Please don’t write personal data in the text fields. It is sent through Web3Forms, which deletes messages after 30 days.", "uform.submit": "Send suggestion", "uform.thanksTitle": "Thanks for your help!", "uform.thanksText": "We read every answer and use them to decide what to do next."},
+    fr: {"contact.kicker": "Pour les entreprises", "user.kicker": "Vous cherchez une place ?", "user.title": "Pour quoi aimeriez-vous être prévenu ?", "user.lead": "Nous commençons avec peu de services. Dites-nous ce qui vous serait utile : vos réponses décident de ce que nous construirons ensuite.", "uform.services": "Pour quoi aimeriez-vous recevoir des alertes ? (plusieurs choix possibles)", "svc.events": "Billets pour des événements", "svc.courses": "Cours, ateliers et colonies", "svc.stay": "Hébergement : hôtels et gîtes", "svc.itv": "Rendez-vous de contrôle technique", "svc.rest": "Une table au restaurant", "svc.sport": "Terrains de padel ou de tennis", "svc.beauty": "Coiffure et esthétique", "svc.clinic": "Cliniques et consultations privées", "svc.activities": "Activités et visites à places limitées", "uform.other": "Autre chose", "uform.otherPh": "Auto-école, salle de sport, vétérinaire…", "uform.region": "Dans quelle ville ou quel pays ?", "uform.regionPh": "Par exemple : Valence, Madrid, Lisbonne…", "uform.channel": "Comment préférez-vous recevoir les alertes ?", "ch.email": "E-mail", "ch.push": "Notification push", "uform.message": "Autre chose à nous dire ?", "uform.messagePh": "Ce qui vous manque, quand cela vous est arrivé…", "uform.note": "C’est anonyme : nous ne demandons ni votre e-mail ni aucune coordonnée. N’écrivez pas de données personnelles dans les champs de texte. L’envoi passe par Web3Forms, qui supprime les messages au bout de 30 jours.", "uform.submit": "Envoyer la suggestion", "uform.thanksTitle": "Merci pour votre aide !", "uform.thanksText": "Nous lisons toutes les réponses et elles nous aident à décider de la suite."},
+    de: {"contact.kicker": "Für Unternehmen", "user.kicker": "Sie suchen einen Platz?", "user.title": "Wofür sollen wir Sie benachrichtigen?", "user.lead": "Wir starten mit wenigen Diensten. Sagen Sie uns, was Ihnen helfen würde: Ihre Antworten entscheiden, was wir als Nächstes bauen.", "uform.services": "Wofür möchten Sie Benachrichtigungen erhalten? (Mehrfachauswahl möglich)", "svc.events": "Tickets für Veranstaltungen", "svc.courses": "Kurse, Workshops und Camps", "svc.stay": "Unterkünfte: Hotels und Landhäuser", "svc.itv": "Termin für die Fahrzeugprüfung", "svc.rest": "Ein Tisch im Restaurant", "svc.sport": "Padel- oder Tennisplätze", "svc.beauty": "Friseur und Kosmetik", "svc.clinic": "Privatkliniken und -praxen", "svc.activities": "Aktivitäten und Besuche mit begrenzten Plätzen", "uform.other": "Etwas anderes", "uform.otherPh": "Fahrschule, Fitnessstudio, Tierarzt …", "uform.region": "In welcher Stadt oder welchem Land?", "uform.regionPh": "Zum Beispiel: Valencia, Madrid, Lissabon …", "uform.channel": "Wie möchten Sie die Benachrichtigungen erhalten?", "ch.email": "E-Mail", "ch.push": "Push-Benachrichtigung", "uform.message": "Möchten Sie uns noch etwas sagen?", "uform.messagePh": "Was Ihnen fehlt, wann es Ihnen passiert ist …", "uform.note": "Anonym: Wir fragen weder nach Ihrer E-Mail-Adresse noch nach Kontaktdaten. Bitte schreiben Sie keine personenbezogenen Daten in die Textfelder. Der Versand erfolgt über Web3Forms, das die Nachrichten nach 30 Tagen löscht.", "uform.submit": "Vorschlag senden", "uform.thanksTitle": "Danke für Ihre Hilfe!", "uform.thanksText": "Wir lesen alle Antworten und entscheiden damit, was wir als Nächstes tun."},
+    it: {"contact.kicker": "Per le aziende", "user.kicker": "Cerchi un posto?", "user.title": "Per cosa vorresti essere avvisato?", "user.lead": "Stiamo iniziando con pochi servizi. Raccontaci cosa ti sarebbe utile: con le tue risposte decidiamo cosa costruire dopo.", "uform.services": "Per cosa vorresti ricevere avvisi? (puoi sceglierne più di uno)", "svc.events": "Biglietti per eventi", "svc.courses": "Corsi, laboratori e campi estivi", "svc.stay": "Alloggi: hotel e agriturismi", "svc.itv": "Appuntamento per la revisione dell’auto", "svc.rest": "Un tavolo al ristorante", "svc.sport": "Campi da padel o da tennis", "svc.beauty": "Parrucchiere ed estetica", "svc.clinic": "Cliniche e studi privati", "svc.activities": "Attività e visite a posti limitati", "uform.other": "Altro", "uform.otherPh": "Scuola guida, palestra, veterinario…", "uform.region": "In quale città o paese?", "uform.regionPh": "Per esempio: Valencia, Madrid, Lisbona…", "uform.channel": "Come preferisci ricevere gli avvisi?", "ch.email": "E-mail", "ch.push": "Notifica push", "uform.message": "Vuoi dirci qualcos’altro?", "uform.messagePh": "Cosa ti manca, quando ti è successo…", "uform.note": "È anonimo: non chiediamo la tua e-mail né alcun dato di contatto. Non scrivere dati personali nei campi di testo. L’invio avviene tramite Web3Forms, che cancella i messaggi dopo 30 giorni.", "uform.submit": "Invia suggerimento", "uform.thanksTitle": "Grazie per il tuo aiuto!", "uform.thanksText": "Leggiamo tutte le risposte e con esse decidiamo cosa fare dopo."},
+    pt: {"contact.kicker": "Para empresas", "user.kicker": "Procura uma vaga?", "user.title": "Sobre o que gostaria que o avisássemos?", "user.lead": "Estamos a começar com poucos serviços. Diga-nos o que lhe daria jeito: com as suas respostas decidimos o que construir a seguir.", "uform.services": "Sobre o que gostaria de receber avisos? (pode escolher vários)", "svc.events": "Bilhetes para eventos", "svc.courses": "Cursos, oficinas e campos de férias", "svc.stay": "Alojamento: hotéis e turismo rural", "svc.itv": "Marcação de inspeção automóvel", "svc.rest": "Mesa num restaurante", "svc.sport": "Campos de padel ou ténis", "svc.beauty": "Cabeleireiro e estética", "svc.clinic": "Clínicas e consultas privadas", "svc.activities": "Atividades e visitas com lugares limitados", "uform.other": "Outra coisa", "uform.otherPh": "Escola de condução, ginásio, veterinário…", "uform.region": "Em que cidade ou país?", "uform.regionPh": "Por exemplo: Valência, Madrid, Lisboa…", "uform.channel": "Como prefere receber os avisos?", "ch.email": "E-mail", "ch.push": "Notificação push", "uform.message": "Mais alguma coisa que nos queira contar?", "uform.messagePh": "O que lhe faz falta, quando lhe aconteceu…", "uform.note": "É anónimo: não pedimos o seu e-mail nem nenhum dado de contacto. Não escreva dados pessoais nos campos de texto. O envio é feito através do Web3Forms, que apaga as mensagens ao fim de 30 dias.", "uform.submit": "Enviar sugestão", "uform.thanksTitle": "Obrigado pela sua ajuda!", "uform.thanksText": "Lemos todas as respostas e com elas decidimos o que fazer a seguir."},
+    ca: {"contact.kicker": "Si ets empresa", "user.kicker": "Si busques un forat", "user.title": "De què t’agradaria que t’avisàssim?", "user.lead": "Comencem amb pocs serveis. Explica’ns què et aniria bé: amb les teves respostes decidim què construirem després.", "uform.services": "De què t’agradaria rebre avisos? (pots marcar-ne diverses)", "svc.events": "Entrades per a esdeveniments", "svc.courses": "Cursos, tallers i casals", "svc.stay": "Allotjament: hotels i cases rurals", "svc.itv": "Cita de la ITV", "svc.rest": "Taula en restaurants", "svc.sport": "Pistes de pàdel o tennis", "svc.beauty": "Perruqueria i estètica", "svc.clinic": "Clíniques i consultes privades", "svc.activities": "Activitats i visites amb places limitades", "uform.other": "Una altra cosa", "uform.otherPh": "Acadèmia, gimnàs, veterinari…", "uform.region": "En quina ciutat o país?", "uform.regionPh": "Per exemple: València, Madrid, Lisboa…", "uform.channel": "Com prefereixes rebre els avisos?", "ch.email": "Correu electrònic", "ch.push": "Notificació push", "uform.message": "Alguna cosa més que ens vulguis dir?", "uform.messagePh": "El que trobes a faltar, quan t’ha passat…", "uform.note": "És anònim: no et demanem el correu ni cap dada de contacte. No escriguis dades personals als camps de text. L’enviament es fa a través de Web3Forms, que esborra els missatges al cap de 30 dies.", "uform.submit": "Envia el suggeriment", "uform.thanksTitle": "Gràcies per la teva ajuda!", "uform.thanksText": "Llegim totes les respostes i amb elles decidim què fem després."},
+    va: {"contact.kicker": "Si eres empresa", "user.kicker": "Si busques un forat", "user.title": "De què t’agradaria que t’avisàrem?", "user.lead": "Comencem amb pocs servicis. Conta’ns què et vindria bé: amb les teues respostes decidim què construirem després.", "uform.services": "De què t’agradaria rebre avisos? (pots marcar-ne diverses)", "svc.events": "Entrades per a esdeveniments", "svc.courses": "Cursos, tallers i escoles d’estiu", "svc.stay": "Allotjament: hotels i cases rurals", "svc.itv": "Cita de la ITV", "svc.rest": "Taula en restaurants", "svc.sport": "Pistes de pàdel o tennis", "svc.beauty": "Perruqueria i estètica", "svc.clinic": "Clíniques i consultes privades", "svc.activities": "Activitats i visites amb places limitades", "uform.other": "Una altra cosa", "uform.otherPh": "Acadèmia, gimnàs, veterinari…", "uform.region": "En quina ciutat o país?", "uform.regionPh": "Per exemple: València, Madrid, Lisboa…", "uform.channel": "Com preferixes rebre els avisos?", "ch.email": "Correu electrònic", "ch.push": "Notificació push", "uform.message": "Alguna cosa més que ens vulgues contar?", "uform.messagePh": "El que trobes a faltar, quan t’ha passat…", "uform.note": "És anònim: no et demanem el correu ni cap dada de contacte. No escrigues dades personals en els camps de text. L’enviament es fa a través de Web3Forms, que esborra els missatges als 30 dies.", "uform.submit": "Envia el suggeriment", "uform.thanksTitle": "Gràcies per la teua ajuda!", "uform.thanksText": "Llegim totes les respostes i amb elles decidim què fem després."},
+    eu: {"contact.kicker": "Enpresa bazara", "user.kicker": "Leku baten bila?", "user.title": "Zeri buruz nahiko zenuke abisatzea?", "user.lead": "Zerbitzu gutxirekin hasi gara. Esan iezaguzu zer etorriko litzaizukeen ondo: zure erantzunekin erabakitzen dugu zer eraiki ondoren.", "uform.services": "Zeri buruzko abisuak jaso nahiko zenituzke? (batzuk hauta ditzakezu)", "svc.events": "Ekitaldietarako sarrerak", "svc.courses": "Ikastaroak, tailerrak eta udalekuak", "svc.stay": "Ostatuak: hotelak eta landetxeak", "svc.itv": "IAT hitzordua (ibilgailuen azterketa teknikoa)", "svc.rest": "Mahaia jatetxeetan", "svc.sport": "Padel edo tenis pistak", "svc.beauty": "Ile-apaindegia eta estetika", "svc.clinic": "Klinika eta kontsulta pribatuak", "svc.activities": "Leku mugatuko jarduerak eta bisitak", "uform.other": "Beste zerbait", "uform.otherPh": "Akademia, gimnasioa, albaitaria…", "uform.region": "Zein hiritan edo herrialdetan?", "uform.regionPh": "Adibidez: Valentzia, Madril, Lisboa…", "uform.channel": "Nola jaso nahi dituzu abisuak?", "ch.email": "Posta elektronikoa", "ch.push": "Push jakinarazpena", "uform.message": "Beste zerbait kontatu nahi diguzu?", "uform.messagePh": "Zer faltan botatzen duzun, noiz gertatu zaizun…", "uform.note": "Anonimoa da: ez dizugu helbide elektronikorik edo harremanetarako daturik eskatzen. Ez idatzi datu pertsonalik testu-eremuetan. Bidalketa Web3Forms bidez egiten da, eta honek 30 egunen buruan ezabatzen ditu mezuak.", "uform.submit": "Bidali iradokizuna", "uform.thanksTitle": "Eskerrik asko laguntzeagatik!", "uform.thanksText": "Erantzun guztiak irakurtzen ditugu, eta haiekin erabakitzen dugu zer egin ondoren."},
+    gl: {"contact.kicker": "Se es empresa", "user.kicker": "Se buscas un oco", "user.title": "De que che gustaría que te avisaramos?", "user.lead": "Comezamos con poucos servizos. Cóntanos que che viría ben: coas túas respostas decidimos que construír despois.", "uform.services": "De que che gustaría recibir avisos? (podes marcar varias)", "svc.events": "Entradas para eventos", "svc.courses": "Cursos, obradoiros e campamentos", "svc.stay": "Aloxamento: hoteis e casas rurais", "svc.itv": "Cita da ITV", "svc.rest": "Mesa en restaurantes", "svc.sport": "Pistas de pádel ou tenis", "svc.beauty": "Perrucaría e estética", "svc.clinic": "Clínicas e consultas privadas", "svc.activities": "Actividades e visitas con prazas limitadas", "uform.other": "Outra cousa", "uform.otherPh": "Academia, ximnasio, veterinario…", "uform.region": "En que cidade ou país?", "uform.regionPh": "Por exemplo: Valencia, Madrid, Lisboa…", "uform.channel": "Como prefires recibir os avisos?", "ch.email": "Correo electrónico", "ch.push": "Notificación push", "uform.message": "Algo máis que nos queiras contar?", "uform.messagePh": "O que botas en falta, cando che pasou…", "uform.note": "É anónimo: non che pedimos o correo nin ningún dato de contacto. Non escribas datos persoais nos campos de texto. O envío faise a través de Web3Forms, que borra as mensaxes aos 30 días.", "uform.submit": "Enviar suxestión", "uform.thanksTitle": "Grazas pola túa axuda!", "uform.thanksText": "Lemos todas as respostas e con elas decidimos que facer despois."},
+  };
+  Object.keys(USERS).forEach(function (lang) {
+    Object.keys(USERS[lang]).forEach(function (key) { T[lang][key] = USERS[lang][key]; });
+  });
+
+  var nodes = document.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-aria], [data-i18n-ph]');
   var select = document.getElementById('lang');
   var squash = function (s) { return s.replace(/\s+/g, ' ').trim(); };
 
@@ -505,7 +512,14 @@
     if (el.dataset.i18n) T.es[el.dataset.i18n] = squash(el.textContent);
     if (el.dataset.i18nHtml) T.es[el.dataset.i18nHtml] = squash(el.innerHTML);
     if (el.dataset.i18nAria) T.es[el.dataset.i18nAria] = el.getAttribute('aria-label');
+    if (el.dataset.i18nPh) T.es[el.dataset.i18nPh] = squash(el.getAttribute('placeholder'));
   });
+  Object.keys(FORM.es).forEach(function (key) { T.es[key] = FORM.es[key]; });
+
+  var current = 'es';
+
+  /** Para otros scripts de la página (el formulario): texto de una clave en el idioma actual. */
+  window.UH = { t: function (key) { return text(current, key); }, lang: function () { return current; } };
 
   function text(lang, key) {
     var dict = T[lang];
@@ -517,7 +531,9 @@
       if (el.dataset.i18n) el.textContent = text(lang, el.dataset.i18n);
       if (el.dataset.i18nHtml) el.innerHTML = text(lang, el.dataset.i18nHtml);
       if (el.dataset.i18nAria) el.setAttribute('aria-label', text(lang, el.dataset.i18nAria));
+      if (el.dataset.i18nPh) el.setAttribute('placeholder', text(lang, el.dataset.i18nPh));
     });
+    current = lang;
     document.documentElement.lang = HTML_LANG[lang] || lang;
     document.title = 'Unhuequín · ' + text(lang, 'hero.title').replace(/<[^>]+>/g, '').replace(/\.$/, '');
     select.value = lang;
